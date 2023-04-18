@@ -23,62 +23,61 @@ let table = new Table({
 
 // Loop 5 times in order to get 5 student grade data.
 for (let i = 0; i < 5; i++){
-// Function to allow prompt in the program.
+  // Declare a prompt to receive Student Name
+  var nameOfStudent = prompt("Enter the name of the student:");
 
+  // Declare arrays for Enabling and Summative Grades
+  var enablingGrades = [];
+  var summativeGrades = [];
 
-// Declare a prompt to receive Student Name
-var nameOfStudent = prompt("Enter the name of the student:");
+  // Use a for loop to receive Enabling Grades
+  for (var j = 1; j <= 5; j++) {
+    var enabling = parseFloat(prompt("Enter enabling assessment " + j + ": ", "0"));
+    enablingGrades.push(enabling);
+  }
 
-// Declare a prompt to receive Enabling Grades
-var enabling1 = parseFloat(prompt("Enter enabling assessment 1: ", "0"));
-var enabling2 = parseFloat(prompt("Enter enabling assessment 2: ", "0"));
-var enabling3 = parseFloat(prompt("Enter enabling assessment 3: ", "0"));
-var enabling4 = parseFloat(prompt("Enter enabling assessment 4: ", "0"));
-var enabling5 = parseFloat(prompt("Enter enabling assessment 5: ", "0"));
+  // Use a for loop to receive Summative Grades
+  for (var j = 1; j <= 3; j++) {
+    var summative = parseFloat(prompt("Enter enabling summative " + j + ": ", "0"));
+    summativeGrades.push(summative);
+  }
 
-// Declare a prompt to receive Summative Grades
-var summative1 = parseFloat(prompt("Enter enabling summative 1: ", "0"));
-var summative2 = parseFloat(prompt("Enter enabling summative 2: ", "0"));
-var summative3 = parseFloat(prompt("Enter enabling summative 3: ", "0"));
+  // Declare a prompt to receive Final Grade
+  var final = parseFloat(prompt("Enter Major Exam: ", "0"));
 
-// Declare a prompt to receive Final Grade
-var final = parseFloat(prompt("Enter Major Exam: ", "0"));
-
-
-// Function to Compute the enabling grade for the total later 30%
-function enablingGrade(enabling1, enabling2, enabling3, enabling4, enabling5){
-
-    let enablingTotal = enabling1 + enabling2 + enabling3 + enabling4 + enabling5;
-    let averageEnabling = enablingTotal / 5
+  // Modify the functions to accept arrays of grades instead of individual grades
+  function enablingGrade(grades) {
+    let enablingTotal = 0;
+    for (let i = 0; i < grades.length; i++) {
+      enablingTotal += grades[i];
+    }
+    let averageEnabling = enablingTotal / grades.length;
     let enablingGrade = averageEnabling * 0.3;
-        return enablingGrade;
+    return enablingGrade;
+  }
+
+  function summativeGrade(grades) {
+    let summativeTotal = 0;
+    for (let i = 0; i < grades.length; i++) {
+      summativeTotal += grades[i];
     }
-
-    // Function to Compute the summative grade for the total later 30%
-function summativeGrade(summative1, summative2, summative3){
-
-    let summativeTotal = summative1 + summative2 + summative3;
-    let averageSummative = summativeTotal / 3
+    let averageSummative = summativeTotal / grades.length;
     let summativeGrade = averageSummative * 0.3;
-        return summativeGrade;
-    }
+    return summativeGrade;
+  }
 
-        // Function to Compute the final exam grade for the total later 40%
 function finalGrade(final){
-
     let finalG = (final * 0.4)
+    return finalG;
+  }
 
-        return finalG;
-    }
+  let totalEnabling = enablingGrade(enablingGrades);
+  let totalSummative = summativeGrade(summativeGrades);
+  let totalFinal = finalGrade(final);
 
-    let totalEnabling = (enablingGrade(enabling1, enabling2, enabling3, enabling4, enabling5));
-    let totalSummative = (summativeGrade(summative1, summative2, summative3));
-    let totalFinal = (finalGrade(final));
+  let gradeScore = totalEnabling + totalSummative + totalFinal;
 
-// variable for total grade computation in numeric form
-let gradeScore = totalEnabling + totalSummative + totalFinal;
-
-console.log(gradeScore)
+  console.log(gradeScore)
 
 
 // Switch Case function to compute the letter grade.
@@ -101,12 +100,12 @@ function getLetterGrade(gradeScore) {
 }
 
 // Computes the average grade for the enabling part to be pushed in the table.
-let enablingTotal = enabling1 + enabling2 + enabling3 + enabling4 + enabling5;
-let averageEnabling = enablingTotal / 5
+
+let averageEnabling = enablingGrade(enablingGrades) * 3
 
 // Computes the average grade for the enabling part to be pushed in the table.
-let summativeTotal = summative1 + summative2 + summative3;
-let averageSummative = summativeTotal / 3
+
+let averageSummative = summativeGrade(summativeGrades) * 3
 
 // Variable for letter grade
 let letterGrade =  getLetterGrade(gradeScore)
