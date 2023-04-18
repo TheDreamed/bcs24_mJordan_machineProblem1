@@ -85,21 +85,16 @@ console.log(gradeScore)
 function getLetterGrade(gradeScore) {
     let letterGrade = '';
 
-    switch (true) {
-        case (gradeScore >= 90 && gradeScore <= 100):
-            letterGrade = 'A';
-            break;
-        case (gradeScore >= 80 && gradeScore <= 89):
-            letterGrade = 'B';
-            break;
-        case (gradeScore >= 70 && gradeScore <= 79):
-            letterGrade = 'C';
-            break;
-        case (gradeScore >= 60 && gradeScore <= 69):
-            letterGrade = 'D';
-            break;
-        default:
-            letterGrade = 'F';
+    if (gradeScore >= 90 && gradeScore <= 100) {
+        letterGrade = 'A';
+    } else if (gradeScore >= 80 && gradeScore <= 89) {
+        letterGrade = 'B';
+    } else if (gradeScore >= 70 && gradeScore <= 79) {
+        letterGrade = 'C';
+    } else if (gradeScore >= 60 && gradeScore <= 69) {
+        letterGrade = 'D';
+    } else {
+        letterGrade = 'F';
     }
 
     return letterGrade;
